@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Openpay_Codi admin configuration
+ *
+ * @category    Openpay
+ * @package     Openpay_Codi
+ * @author      Jose Romero
+ * @copyright   Openpay (http://openpay.mx)
+ * @license     http://www.apache.org/licenses/LICENSE-2.0  Apache License Version 2.0
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="payment">
+            <group id="openpay_codi" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Openpay (CoDi®)</label>
+                <comment>
+                    <![CDATA[<a href="http://openpay.mx/" target="_blank">Click here to sign up for Openpay account</a>]]>
+                </comment>
+                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Habilitar</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>                
+                <field id="is_sandbox" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Sandbox</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>                                                  
+                <field id="title" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Title</label>
+                </field>
+                <field id="sandbox_merchant_id" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Sandbox Merchant ID</label>     
+                    <depends>
+                        <field id="is_sandbox">1</field>
+                    </depends>                              
+                </field>
+                <field id="sandbox_sk" translate="label" type="obscure" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Sandbox Llave Secreta</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    <depends>
+                        <field id="is_sandbox">1</field>
+                    </depends>               
+                </field>                
+                <field id="live_merchant_id" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Producción Merchant ID</label>         
+                    <depends>
+                        <field id="is_sandbox">0</field>
+                    </depends>                                           
+                </field>
+                <field id="live_sk" translate="label" type="obscure" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Producción Llave Secreta</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    <depends>
+                        <field id="is_sandbox">0</field>
+                    </depends>                                
+                </field>
+                <field id="expiration" translate="label" type="select" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Definir fecha límite de pago</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>La fecha de expiración por defecto es 5 minutos después de la realización del cargo.</comment>
+                </field>  
+                <field id="deadline" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Tiempo límite de pago</label>                    
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="expiration">1</field>
+                    </depends> 
+                </field>
+                <field id="time_unit" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Unidad de tiempo</label>
+                    <source_model>Openpay\Codi\Model\Source\TimeUnit::getUnits</source_model>
+                    <depends>
+                        <field id="expiration">1</field>
+                    </depends>
+                </field>                                                                         
+                <field id="allowspecific" translate="label" type="allowspecific" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Pago Aplicable para Países</label>
+                    <source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+                </field>
+                <field id="specificcountry" translate="label" type="multiselect" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="0"  canRestore="1">
+                    <label>Pago para Países Específicos</label>
+                    <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                </field>          
+                <field id="sort_order" translate="label" type="text" sortOrder="13" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Orden</label>
+                </field>               
+            </group>
+        </section>
+    </system>
+</config>

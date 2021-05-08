@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Openpay_Codi layout Onepage
+ *
+ * @category    Openpay
+ * @package     Openpay_Codi
+ * @author      Jose Romero
+ * @copyright   Openpay (http://openpay.mx)
+ * @license     http://www.apache.org/licenses/LICENSE-2.0  Apache License Version 2.0
+*/
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">    
+    <head>
+        <script src="Openpay_Codi::js/order_confirmation.js"/>
+        <link src="Openpay_Codi::css/success.css"/>
+    </head>
+    <body>         
+        <referenceBlock name="page.main.title">
+            <block class="Magento\Checkout\Block\Onepage\Success" name="checkout.success.print.button" template="button.phtml"/>
+            <action method="setPageTitle">
+                <argument translate="true" name="title" xsi:type="string">Thank you for your purchase!</argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="content">
+            <block class="Magento\Checkout\Block\Onepage\Success" name="checkout.success" template="Openpay_Codi::success.phtml" cacheable="false"/>
+            <block class="Magento\Checkout\Block\Registration" name="checkout.registration" template="registration.phtml" cacheable="false"/>
+        </referenceContainer>
+        <container name="order.success.additional.info" label="Order Success Additional Info"/>
+    </body>
+</page>
