@@ -4,6 +4,32 @@
  * See COPYING.txt for license details.
  */
 -->
+<style>
+    .payment-method__logo {
+        float: right;
+    }
+    .openpay__title-steps {
+        margin-top: 25px; 
+        margin-bottom: 20px;
+        color: #0063A8;
+    }
+    .steps {
+        overflow: hidden;
+    }
+    .steps__item {
+        width: 30%; float: left; 
+        text-align: center; 
+        padding-left: 1.5%; 
+        padding-right: 1.5%;
+    }
+    .steps__image {
+        max-width: 75%;
+    }
+    .steps__text {
+        padding: 3px;
+        color: #0063A8;
+    }
+</style>
 <div class="payment-method" data-bind="css: {'_active': (getCode() == isChecked())}">
     <div class="payment-method-title field choice">
         <input type="radio"
@@ -11,6 +37,7 @@
                class="radio"
                data-bind="attr: {'id': getCode()}, value: getCode(), checked: isChecked, click: selectPaymentMethod, visible: isRadioButtonVisible()"/>
         <label data-bind="attr: {'for': getCode()}" class="label"><span data-bind="text: getTitle()"></span></label>
+        <img src="https://img.openpay.mx/plugins/openpay-logo_106x25.png" class="payment-method__logo">
     </div>
     <div class="payment-method-content">
         <!-- ko foreach: getRegion('messages') -->
@@ -22,7 +49,7 @@
             <!--/ko-->
         </div>
         
-        <div id="codi-container" class="fieldset" style="margin-bottom: 20px;">
+        <div id="codi-container" class="openpay fieldset" style="margin-bottom: 20px;">
             <div class="items check payable">
                 <div style="display: flex; align-items: center;">
                     <div style="flex: 0 0 30%; max-width: 30%; text-align: center;">
@@ -33,19 +60,19 @@
                         <p>CoDi® es una plataforma desarrollada por Banco de México que permite hacer cobros a través de un código QR desde un celular.</p>
                     </div>
                 </div>                
-                <h4 style="margin-top: 25px; margin-bottom: 15px;">Pasos para completar tu pago</h4>
-                <div style="overflow: hidden;">                
-                    <div style="width: 30%; float: left; text-align: center; padding-left: 1.5%; padding-right: 1.5%;">
-                        <img src="https://i.postimg.cc/sgC8ZKJB/magento2-step1.png" alt="" style="max-width: 100%;" />
-                        <p style="padding: 3px;">Haz clic en el botón de pago, tu compra quedará en espera de que realices tu pago.</p>
+                <h4 class="openpay__title-steps">Pasos para completar tu pago</h4>
+                <div class="steps">                
+                    <div class="steps__item">
+                        <img src="https://img.openpay.mx/plugins/file.svg" alt="" class="steps__image" />
+                        <p class="steps__text">Haz clic en el botón de pago, tu compra quedará en espera de que realices tu pago.</p>
                     </div>    
-                    <div style="width: 30%; float: left; text-align: center; padding-left: 1.5%; padding-right: 1.5%;">
-                        <img src="https://i.postimg.cc/3xjqjpLt/magento2-step2.png" alt="" style="max-width: 100%;" />
-                        <p style="padding: 3px;">Localiza la sección de CoDi® en tu app móvil, sigue los pasos para escanear el código QR para completar tu pago.</p>
+                    <div class="steps__item">
+                        <img src="https://img.openpay.mx/plugins/qr.svg" alt="" class="steps__image" />
+                        <p class="steps__text">Localiza la sección de CoDi® en tu app móvil, sigue los pasos para escanear el código QR para completar tu pago.</p>
                     </div>    
-                    <div style="width: 30%; float: left; text-align: center; padding-left: 1.5%; padding-right: 1.5%;">
-                        <img src="https://i.postimg.cc/pd26sT4R/magento2-step3.png" alt="" style="max-width: 100%;" />
-                        <p style="padding: 3px;">Inmediatamente después de recibir tu pago te enviaremos un correo electrónico con la confirmación de pago.</p>
+                    <div class="steps__item">
+                        <img src="https://img.openpay.mx/plugins/mail.svg" alt="" class="steps__image" />
+                        <p class="steps__text">Inmediatamente después de recibir tu pago te enviaremos un correo electrónico con la confirmación de pago.</p>
                     </div>    
                 </div>
             </div>
@@ -73,4 +100,3 @@
         </div>
     </div>
 </div>
-        
