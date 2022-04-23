@@ -196,11 +196,13 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
             $charge = $this->makeOpenpayCharge($customer_data, $charge_request);  
             $charge_id = '';
             
-            if ($charge->id) {
-                $charge_id = $charge->id;
-            } elseif(!$charge->id && $charge->redirect_url) {
-                //$url_array = explode('/', $charge->redirect_url);
-                //$charge_id = $url_array[8];
+            if(is_object($charge)){
+                if ($charge->id) {
+                    $charge_id = $charge->id;
+                } elseif(!$charge->id && $charge->redirect_url) {
+                    //$url_array = explode('/', $charge->redirect_url);
+                    //$charge_id = $url_array[8];
+                }
             }
                         
             $payment->setTransactionId($charge_id);
@@ -220,11 +222,14 @@ class Payment extends \Magento\Payment\Model\Method\AbstractMethod
 
             $base_url = $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_WEB);
             
-            if($charge->payment_method->barcode_base64){
-                $_SESSION['barcode_base64'] = $charge->payment_method->barcode_base64;
-                $_SESSION['due_date'] = $charge->due_date;
-                $_SESSION['openpay_codi_redirect_url'] = $base_url.'openpay/payment/confirm';
+            if(is_object($charge)){
+                if($charge->payment_method->barcode_base64){
+                    $_SESSION['barcode_base64'] = $charge->payment_method->barcode_base64;
+                    $_SESSION['due_date'] = $charge->due_date;
+                }
             }
+            $_SESSION['openpay_codi_redirect_url'] = $base_url.'openpay/payment/confirm';
+            
             
         } catch (\Exception $e) {
             $this->debugData(['exception' => $e->getMessage()]);

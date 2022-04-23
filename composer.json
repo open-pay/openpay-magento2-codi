@@ -5,7 +5,8 @@
     "minimum-stability": "stable",    
     "license": "Apache-2.0",
     "require": {
-        "openpay/sdk": "2.2.*"
+        "openpay/sdk": "2.2.*",
+        "openpay/magento2-cards": "3.4.*"
     },
     "authors": [
         {
