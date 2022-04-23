@@ -10,7 +10,7 @@ class OpenpayCustomer extends \Magento\Framework\Model\AbstractModel implements 
     protected $_eventPrefix = 'openpay_customers';
         
     protected function _construct() {
-        $this->_init('Openpay\Codi\Model\ResourceModel\OpenpayCustomer');        
+        $this->_init('Openpay\Cards\Model\ResourceModel\OpenpayCustomer');        
     }
 
     public function getIdentities() {
